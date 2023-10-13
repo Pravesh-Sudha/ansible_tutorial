@@ -2,7 +2,7 @@
 
 - hosts: all
   become: true
-  pre_tasks:
+  tasks:
     - name: install Updates
       apt:
         update_cache: yes
@@ -18,6 +18,7 @@
         - apache2
         - libapache-mod-php
         state: latest
+      tags: apache, apache2
 
 - hosts: db-servers
   become: true
@@ -25,4 +26,5 @@
     - name: Installing mariadb in Ubuntu
       apt:
         name: mariadb-server
-        state: absent  
+        state: absent
+      tags: mariadb
