@@ -3,3 +3,6 @@
 
 [web-servers]
 192.168.16.135
+
+[workstations]
+192.168.16.135

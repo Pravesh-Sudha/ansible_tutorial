@@ -15,7 +15,8 @@
     - name: install apache2 and php package
       apt:
         name:
-        - apache2
+          - apache2
+          - libapache2-mod-php
         state: latest
       tags: apache,apache2
 
@@ -27,6 +28,23 @@
         owner: root
         group: root
         mode: 0644
+
+- hosts: workstations
+  become: true
+  tasks:
+
+    - name: Install unzip
+      package:
+        name: unzip
+
+    - name: install Terraform
+      unarchive:
+        src: https://releases.hashicorp.com/terraform/1.6.1/terraform_1.6.1_linux_amd64.zip
+        dest: /usr/local/bin
+        remote_src: yes
+        mode: 0755
+        owner: root
+        group: root
 
 - hosts: db-servers
   become: true
