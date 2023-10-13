@@ -13,12 +13,20 @@
   become: true
   tasks:
     - name: install apache2 and php package
-      package:
+      apt:
         name:
         - apache2
-        - libapache-mod-php
         state: latest
-      tags: apache, apache2
+      tags: apache,apache2
+
+    - name: Copying html file
+      tags: apache,apache2
+      copy:
+        src: basic_html.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644
 
 - hosts: db-servers
   become: true
